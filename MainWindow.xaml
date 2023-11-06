@@ -12,10 +12,19 @@
         <local:ColorConverterViewModel />
     </Window.DataContext>
     <Grid Margin="10">
-        <TextBlock Text="Color Converters - RGB, CMYK, Hex, HSV, HSL Converters" FontWeight="Bold" HorizontalAlignment="Center" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto">
+            </RowDefinition>
+        </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="0,30,0,0">
 
+        <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="0,30,0,0" Grid.Row="0" HorizontalAlignment="Center">
+            <TextBlock Text="Konwersja przestrzeni barw - RGB, CMYK, Hex, HSV" FontWeight="Bold" HorizontalAlignment="Center" />
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Type RGB (R,G,B):" VerticalAlignment="Center" Width="150"/>
                 <TextBox Text="{Binding Color.R , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
@@ -56,8 +65,64 @@
             <!-- Możesz dodać kolejne sekcje dla HSV i HSL w podobny sposób -->
 
             <Rectangle Height="50" Width="250" Fill="{Binding ColorDisplay}" Margin="0,20,0,0"/>
-            <Label Content="{Binding ColorDisplayHex}" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Label Content="HEX:" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+                <Label Content="{Binding ColorDisplayHex}" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+            </StackPanel>
+           
 
+        </StackPanel>
+        <Viewport3D Grid.Row="1">
+            <Viewport3D.Camera>
+                <PerspectiveCamera Position="6 6 6" LookDirection="-6 -6 -6"/>
+            </Viewport3D.Camera>
+            <ModelVisual3D>
+                <ModelVisual3D.Content>
+                    <DirectionalLight Direction="-1,-1,-1"/>
+                </ModelVisual3D.Content>
+            </ModelVisual3D>
+            <ModelVisual3D>
+                <ModelVisual3D.Content>
+                    <GeometryModel3D Material="{Binding GradientMaterial}">
+                        <GeometryModel3D.Geometry>
+                            <MeshGeometry3D
+                                Positions="0 0 0  1 0 0  0 1 0  1 1 0  0 0 1  1 0 1  0 1 1  1 1 1"
+                                TriangleIndices="2 3 1  2 1 0  7 1 3  7 5 1  6 5 7  6 4 5  6 2 0  6 0 4  2 7 3  2 6 7  0 1 5  0 5 4"
+                                TextureCoordinates="0 0 0  1 0 0  0 1 0  1 1 0  0 0 1  1 0 1  0 1 1  1 1 1">
+                            </MeshGeometry3D>
+                        </GeometryModel3D.Geometry>
+                    </GeometryModel3D>
+                </ModelVisual3D.Content>
+                <ModelVisual3D.Transform>
+                    <Transform3DGroup>
+                        <Transform3DGroup.Children>
+                            <TranslateTransform3D OffsetX="-0.5" OffsetY="-0.5" OffsetZ="-0.5" />
+                            <RotateTransform3D>
+                                <RotateTransform3D.Rotation>
+                                    <AxisAngleRotation3D x:Name="rotateX" Axis="1 0 0"/>
+                                </RotateTransform3D.Rotation>
+                            </RotateTransform3D>
+                            <RotateTransform3D>
+                                <RotateTransform3D.Rotation>
+                                    <AxisAngleRotation3D x:Name="rotateY" Axis="0 1 0"/>
+                                </RotateTransform3D.Rotation>
+                            </RotateTransform3D>
+                            <RotateTransform3D>
+                                <RotateTransform3D.Rotation>
+                                    <AxisAngleRotation3D x:Name="rotateZ" Axis="0 0 1"/>
+                                </RotateTransform3D.Rotation>
+                            </RotateTransform3D>
+                            <TranslateTransform3D OffsetX="0.5" OffsetY="0.5" OffsetZ="0.5" />
+                        </Transform3DGroup.Children>
+                    </Transform3DGroup>
+                </ModelVisual3D.Transform>
+            </ModelVisual3D>
+        </Viewport3D>
+
+        <!-- Sliders for rotating the cube -->
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Horizontal" Grid.Row="2">
+            <Slider Width="100" Minimum="0" Maximum="360" Value="{Binding ElementName=rotateX, Path=Angle, Mode=TwoWay}" />
+            <Slider Width="100" Minimum="0" Maximum="360" Value="{Binding ElementName=rotateY, Path=Angle, Mode=TwoWay}" />
         </StackPanel>
     </Grid>
 </Window>
