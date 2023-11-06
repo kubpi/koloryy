@@ -18,7 +18,7 @@ namespace kolory
         private float _h;
         private float _s;
         private float _v;
-
+        private bool _updating = false;
         public float H {
             get { return _h; }
             set
@@ -27,8 +27,19 @@ namespace kolory
                 {
                     _h = value;
                     OnPropertyChanged(nameof(H));
-                    ConvertHSVToRGB();
-                    ConvertHSVToCMYK();
+                    if (!_updating)
+                    {
+                        ConvertHSVToRGB();
+                        ConvertHSVToCMYK();
+                    }
+                   
+                    OnPropertyChanged(nameof(R));
+                    OnPropertyChanged(nameof(G));
+                    OnPropertyChanged(nameof(B));
+                    OnPropertyChanged(nameof(C));
+                    OnPropertyChanged(nameof(M));
+                    OnPropertyChanged(nameof(Y));
+                    OnPropertyChanged(nameof(K));
                 }
             }
         }
@@ -42,8 +53,18 @@ namespace kolory
                 {
                     _s = value;
                     OnPropertyChanged(nameof(S));
-                    ConvertHSVToRGB();
-                    ConvertHSVToCMYK();
+                     if (!_updating)
+                    {
+                        ConvertHSVToRGB();
+                        ConvertHSVToCMYK();
+                    }
+                    OnPropertyChanged(nameof(R));
+                    OnPropertyChanged(nameof(G));
+                    OnPropertyChanged(nameof(B));
+                    OnPropertyChanged(nameof(C));
+                    OnPropertyChanged(nameof(M));
+                    OnPropertyChanged(nameof(Y));
+                    OnPropertyChanged(nameof(K));
                 }
             }
         }
@@ -59,12 +80,16 @@ namespace kolory
                     OnPropertyChanged(nameof(V));
                     ConvertHSVToRGB();
                     ConvertHSVToCMYK();
+                    OnPropertyChanged(nameof(R));
+                    OnPropertyChanged(nameof(G));
+                    OnPropertyChanged(nameof(B));
+                    OnPropertyChanged(nameof(C));
+                    OnPropertyChanged(nameof(M));
+                    OnPropertyChanged(nameof(Y));
+                    OnPropertyChanged(nameof(K));
                 }
             }
         }
-
-
-
 
 
         private double _c;
@@ -82,7 +107,16 @@ namespace kolory
                 {
                     _r = value;
                     OnPropertyChanged(nameof(R));
+                    ConvertToHSV();
+                    ConvertToCMYK();
 
+                    OnPropertyChanged(nameof(H));
+                    OnPropertyChanged(nameof(S));
+                    OnPropertyChanged(nameof(V));
+                    OnPropertyChanged(nameof(C));
+                    OnPropertyChanged(nameof(M));
+                    OnPropertyChanged(nameof(Y));
+                    OnPropertyChanged(nameof(K));
                 }
             }
         }
@@ -96,10 +130,18 @@ namespace kolory
                 {
                     _g = value;
                     OnPropertyChanged(nameof(G));
+                    ConvertToHSV();
+                    ConvertToCMYK();
+                    OnPropertyChanged(nameof(H));
+                    OnPropertyChanged(nameof(S));
+                    OnPropertyChanged(nameof(V));
+                    OnPropertyChanged(nameof(C));
+                    OnPropertyChanged(nameof(M));
+                    OnPropertyChanged(nameof(Y));
+                    OnPropertyChanged(nameof(K));
                 }
             }
         }
-
         public byte B
         {
             get { return _b; }
@@ -109,6 +151,15 @@ namespace kolory
                 {
                     _b = value;
                     OnPropertyChanged(nameof(B));
+                    ConvertToHSV();
+                    ConvertToCMYK();
+                    OnPropertyChanged(nameof(H));
+                    OnPropertyChanged(nameof(S));
+                    OnPropertyChanged(nameof(V));
+                    OnPropertyChanged(nameof(C));
+                    OnPropertyChanged(nameof(M));
+                    OnPropertyChanged(nameof(Y));
+                    OnPropertyChanged(nameof(K));
                 }
             }
         }
@@ -120,7 +171,15 @@ namespace kolory
             {
                 _c = value;
                 OnPropertyChanged(nameof(C));
-                ConvertCMYKToRGB();
+                ConvertCMYKToRGB(); // Aktualizacja RGB na podstawie nowego CMYK                                   // Aktualizuj wartości HSV na podstawie nowego RGB
+                ConvertToHSV();
+                // Informowanie interfejsu użytkownika o zmianie koloru
+                OnPropertyChanged(nameof(R));
+                OnPropertyChanged(nameof(G));
+                OnPropertyChanged(nameof(B));
+                OnPropertyChanged(nameof(H));
+                OnPropertyChanged(nameof(S));
+                OnPropertyChanged(nameof(V));
             }
         }
 
@@ -131,7 +190,15 @@ namespace kolory
             {
                 _m = value;
                 OnPropertyChanged(nameof(M));
-                ConvertCMYKToRGB();
+                ConvertCMYKToRGB(); // Aktualizacja RGB na podstawie nowego CMYK                                // Aktualizuj wartości HSV na podstawie nowego RGB
+                ConvertToHSV();
+                // Informowanie interfejsu użytkownika o zmianie koloru
+                OnPropertyChanged(nameof(R));
+                OnPropertyChanged(nameof(G));
+                OnPropertyChanged(nameof(B));
+                OnPropertyChanged(nameof(H));
+                OnPropertyChanged(nameof(S));
+                OnPropertyChanged(nameof(V));
             }
         }
 
@@ -142,7 +209,16 @@ namespace kolory
             {
                 _y = value;
                 OnPropertyChanged(nameof(Y));
-                ConvertCMYKToRGB();
+                ConvertCMYKToRGB(); // Aktualizacja RGB na podstawie nowego CMYK
+                                    // Aktualizuj wartości HSV na podstawie nowego RGB
+                ConvertToHSV();
+                // Informowanie interfejsu użytkownika o zmianie koloru
+                OnPropertyChanged(nameof(R));
+                OnPropertyChanged(nameof(G));
+                OnPropertyChanged(nameof(B));
+                OnPropertyChanged(nameof(H));
+                OnPropertyChanged(nameof(S));
+                OnPropertyChanged(nameof(V));
             }
         }
 
@@ -153,7 +229,16 @@ namespace kolory
             {
                 _k = value;
                 OnPropertyChanged(nameof(K));
-                ConvertCMYKToRGB();
+                ConvertCMYKToRGB(); // Aktualizacja RGB na podstawie nowego CMYK
+                                    // Aktualizuj wartości HSV na podstawie nowego RGB
+                ConvertToHSV();
+                // Informowanie interfejsu użytkownika o zmianie koloru
+                OnPropertyChanged(nameof(R));
+                OnPropertyChanged(nameof(G));
+                OnPropertyChanged(nameof(B));
+                OnPropertyChanged(nameof(H));
+                OnPropertyChanged(nameof(S));
+                OnPropertyChanged(nameof(V));
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;
@@ -195,31 +280,40 @@ namespace kolory
                     h = h + 360;
             }
 
-            H = (float)h;
-            S = (float)s;
-            V = (float)v / 255;
+            _h = (float)h;
+            _s = (float)s;
+            _v = (float)v / 255;
+            OnPropertyChanged(nameof(H));
+            OnPropertyChanged(nameof(S));
+            OnPropertyChanged(nameof(V));
         }
 
         public void ConvertToCMYK()
         {
             if (R == 0 && G == 0 && B == 0)
             {
-                C = 0;
-                M = 0;
-                Y = 0;
-                K = 1;
+                _c = 0;
+                _m = 0;
+                _y = 0;
+                _k = 1;
                 return;
             }
 
-            C = 1 - (R / 255.0);
-            M = 1 - (G / 255.0);
-            Y = 1 - (B / 255.0);
+            double c = 1 - (_r / 255.0);
+            double m = 1 - (_g / 255.0);
+            double y = 1 - (_b / 255.0);
+            double k = Math.Min(c, Math.Min(m, y));
 
-            K = Math.Min(C, Math.Min(M, Y));
+            _c = (c - k) / (1 - k);
+            _m = (m - k) / (1 - k);
+            _y = (y - k) / (1 - k);
+            _k = k;
 
-            C = (C - K) / (1 - K);
-            M = (M - K) / (1 - K);
-            Y = (Y - K) / (1 - K);
+            // Powiadamiaj o zmianach
+            OnPropertyChanged(nameof(C));
+            OnPropertyChanged(nameof(M));
+            OnPropertyChanged(nameof(Y));
+            OnPropertyChanged(nameof(K));
         }
 
         // Można teraz wywołać te metody po ustawieniu wartości RGB w modelu.
@@ -228,7 +322,7 @@ namespace kolory
         {
             if (S == 0)
             {
-                R = G = B = (byte)(V * 255);
+                _r = _g = _b = (byte)(V * 255);
                 return;
             }
 
@@ -242,36 +336,44 @@ namespace kolory
             switch (i)
             {
                 case 0:
-                    R = (byte)(V * 255);
-                    G = (byte)(t * 255);
-                    B = (byte)(p * 255);
+                    _r = (byte)(V * 255);
+                    _g = (byte)(t * 255);
+                    _b = (byte)(p * 255);
                     break;
                 case 1:
-                    R = (byte)(q * 255);
-                    G = (byte)(V * 255);
-                    B = (byte)(p * 255);
+                    _r = (byte)(q * 255);
+                    _g = (byte)(V * 255);
+                    _b = (byte)(p * 255);
                     break;
                 case 2:
-                    R = (byte)(p * 255);
-                    G = (byte)(V * 255);
+                    _r = (byte)(p * 255);
+                    _g = (byte)(V * 255);
                     B = (byte)(t * 255);
                     break;
                 case 3:
-                    R = (byte)(p * 255);
-                    G = (byte)(q * 255);
-                    B = (byte)(V * 255);
+                    _r = (byte)(p * 255);
+                    _g = (byte)(q * 255);
+                    _b = (byte)(V * 255);
                     break;
                 case 4:
-                    R = (byte)(t * 255);
-                    G = (byte)(p * 255);
-                    B = (byte)(V * 255);
+                    _r = (byte)(t * 255);
+                    _g = (byte)(p * 255);
+                    _b = (byte)(V * 255);
                     break;
                 default:
-                    R = (byte)(V * 255);
-                    G = (byte)(p * 255);
-                    B = (byte)(q * 255);
+                    _r = (byte)(V * 255);
+                    _g = (byte)(p * 255);
+                    _b = (byte)(q * 255);
                     break;
             }
+            // Powiadamiaj o zmianach
+            OnPropertyChanged(nameof(R));
+            OnPropertyChanged(nameof(G));
+            OnPropertyChanged(nameof(B));
+
+            // Ponieważ zmieniły się wartości RGB, trzeba również zaktualizować CMYK
+            ConvertToCMYK();
+
         }
         public void ConvertHSVToCMYK()
         {
@@ -280,6 +382,7 @@ namespace kolory
 
             // Następnie konwertujemy tymczasowe wartości RGB na CMYK
             RGBToCMYK(tempR, tempG, tempB);
+          
         }
 
         private (byte, byte, byte) HSVToRGB()
@@ -333,6 +436,15 @@ namespace kolory
                     break;
             }
 
+            // Zaktualizuj prywatne pola bezpośrednio
+            _r = tempR;
+            _g = tempG;
+            _b = tempB;
+
+            // Powiadamiaj o zmianach
+            OnPropertyChanged(nameof(R));
+            OnPropertyChanged(nameof(G));
+            OnPropertyChanged(nameof(B));
             return (tempR, tempG, tempB);
         }
 
@@ -363,15 +475,23 @@ namespace kolory
         {
             if (K == 1)
             {
-                R = 0;
-                G = 0;
-                B = 0;
+                _r = 0;
+                _g = 0;
+                _b = 0;
                 return;
             }
 
-            R = Convert.ToByte(255 * (1 - C) * (1 - K));
-            G = Convert.ToByte(255 * (1 - M) * (1 - K));
-            B = Convert.ToByte(255 * (1 - Y) * (1 - K));
+
+            // Zaktualizuj prywatne pola bezpośrednio
+            _r = Convert.ToByte(255 * (1 - _c) * (1 - _k));
+            _g = Convert.ToByte(255 * (1 - _m) * (1 - _k));
+            _b = Convert.ToByte(255 * (1 - _y) * (1 - _k));
+
+            // Powiadamiaj o zmianach
+            OnPropertyChanged(nameof(R));
+            OnPropertyChanged(nameof(G));
+            OnPropertyChanged(nameof(B));
+            ConvertToHSV();
         }
 
 

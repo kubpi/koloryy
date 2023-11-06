@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kubpi\\Desktop\\kolory\\kolory.csproj",
+      "projectUniqueName": "C:\\Users\\kubpi\\Desktop\\koloryy\\kolory.csproj",
       "projectName": "kolory",
-      "projectPath": "C:\\Users\\kubpi\\Desktop\\kolory\\kolory.csproj",
+      "projectPath": "C:\\Users\\kubpi\\Desktop\\koloryy\\kolory.csproj",
       "packagesPath": "C:\\Users\\kubpi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kubpi\\Desktop\\kolory\\obj\\",
+      "outputPath": "C:\\Users\\kubpi\\Desktop\\koloryy\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\kubpi\\AppData\\Roaming\\NuGet\\NuGet.Config",

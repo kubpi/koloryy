@@ -18,26 +18,36 @@ namespace kolory
         public ColorModel Color
         {
             get { return _color ??= new ColorModel(); }
+            set
+            {
+                if (_color != value)
+                {
+                    _color = value;
+                    OnPropertyChanged(nameof(Color));
+                    OnPropertyChanged(nameof(ColorDisplay));
+                    OnPropertyChanged(nameof(ColorDisplayHex));
+                }
+            }
         }
 
+        public ColorConverterViewModel()
+        {
+            _color = new ColorModel();
+            _color.PropertyChanged += ColorModel_PropertyChanged;
+        }
+
+        private void ColorModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            // This will handle any property change within ColorModel
+            OnPropertyChanged(nameof(ColorDisplay));
+            OnPropertyChanged(nameof(ColorDisplayHex));
+        }
         public string ColorDisplayHex => $"#{Color.R:X2}{Color.G:X2}{Color.B:X2}";
 
         public Brush ColorDisplay => new SolidColorBrush(System.Windows.Media.Color.FromRgb(Color.R, Color.G, Color.B));
 
 
-        public ICommand ConvertCommand
-        {
-            get
-            {
-                return _convertCommand ??= new RelayCommand(param =>
-                {
-                    Color.ConvertToHSV();
-                    Color.ConvertToCMYK();
-                    OnPropertyChanged(nameof(ColorDisplayHex));
-                    OnPropertyChanged(nameof(ColorDisplay));
-                });
-            }
-        }
+
 
         // Implementacja interfejsu INotifyPropertyChanged...
         public event PropertyChangedEventHandler PropertyChanged;
