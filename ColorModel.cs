@@ -1,102 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace kolory
 {
     public class ColorModel: INotifyPropertyChanged
     {
-     
         private byte _r;
         private byte _g;
         private byte _b;
-
-
         private float _h;
         private float _s;
         private float _v;
-        private bool _updating = false;
-        public float H {
-            get { return _h; }
-            set
-            {
-                if (_h != value)
-                {
-                    _h = value;
-                    OnPropertyChanged(nameof(H));
-                    if (!_updating)
-                    {
-                        ConvertHSVToRGB();
-                        ConvertHSVToCMYK();
-                    }
-                   
-                    OnPropertyChanged(nameof(R));
-                    OnPropertyChanged(nameof(G));
-                    OnPropertyChanged(nameof(B));
-                    OnPropertyChanged(nameof(C));
-                    OnPropertyChanged(nameof(M));
-                    OnPropertyChanged(nameof(Y));
-                    OnPropertyChanged(nameof(K));
-                }
-            }
-        }
-
-        public float S
-        {
-            get { return _s; }
-            set
-            {
-                if (_s != value)
-                {
-                    _s = value;
-                    OnPropertyChanged(nameof(S));
-                     if (!_updating)
-                    {
-                        ConvertHSVToRGB();
-                        ConvertHSVToCMYK();
-                    }
-                    OnPropertyChanged(nameof(R));
-                    OnPropertyChanged(nameof(G));
-                    OnPropertyChanged(nameof(B));
-                    OnPropertyChanged(nameof(C));
-                    OnPropertyChanged(nameof(M));
-                    OnPropertyChanged(nameof(Y));
-                    OnPropertyChanged(nameof(K));
-                }
-            }
-        }
-
-        public float V
-        {
-            get { return _v; }
-            set
-            {
-                if (_v != value)
-                {
-                    _v = value;
-                    OnPropertyChanged(nameof(V));
-                    ConvertHSVToRGB();
-                    ConvertHSVToCMYK();
-                    OnPropertyChanged(nameof(R));
-                    OnPropertyChanged(nameof(G));
-                    OnPropertyChanged(nameof(B));
-                    OnPropertyChanged(nameof(C));
-                    OnPropertyChanged(nameof(M));
-                    OnPropertyChanged(nameof(Y));
-                    OnPropertyChanged(nameof(K));
-                }
-            }
-        }
-
-
         private double _c;
         private double _m;
         private double _y;
         private double _k;
 
+        private bool _updating = false;
 
         public byte R
         {
@@ -109,7 +29,6 @@ namespace kolory
                     OnPropertyChanged(nameof(R));
                     ConvertToHSV();
                     ConvertToCMYK();
-
                     OnPropertyChanged(nameof(H));
                     OnPropertyChanged(nameof(S));
                     OnPropertyChanged(nameof(V));
@@ -120,7 +39,6 @@ namespace kolory
                 }
             }
         }
-
         public byte G
         {
             get { return _g; }
@@ -163,7 +81,68 @@ namespace kolory
                 }
             }
         }
-
+        public float H {
+            get { return _h; }
+            set
+            {
+                if (_h != value)
+                {
+                    _h = value;
+                    OnPropertyChanged(nameof(H));
+                    ConvertHSVToRGB();
+                    ConvertHSVToCMYK();           
+                    OnPropertyChanged(nameof(R));
+                    OnPropertyChanged(nameof(G));
+                    OnPropertyChanged(nameof(B));
+                    OnPropertyChanged(nameof(C));
+                    OnPropertyChanged(nameof(M));
+                    OnPropertyChanged(nameof(Y));
+                    OnPropertyChanged(nameof(K));
+                }
+            }
+        }
+        public float S
+        {
+            get { return _s; }
+            set
+            {
+                if (_s != value)
+                {
+                    _s = value;
+                    OnPropertyChanged(nameof(S));                                                      
+                    ConvertHSVToRGB();
+                    ConvertHSVToCMYK();                    
+                    OnPropertyChanged(nameof(R));
+                    OnPropertyChanged(nameof(G));
+                    OnPropertyChanged(nameof(B));
+                    OnPropertyChanged(nameof(C));
+                    OnPropertyChanged(nameof(M));
+                    OnPropertyChanged(nameof(Y));
+                    OnPropertyChanged(nameof(K));
+                }
+            }
+        }
+        public float V
+        {
+            get { return _v; }
+            set
+            {
+                if (_v != value)
+                {
+                    _v = value;
+                    OnPropertyChanged(nameof(V));
+                    ConvertHSVToRGB();
+                    ConvertHSVToCMYK();
+                    OnPropertyChanged(nameof(R));
+                    OnPropertyChanged(nameof(G));
+                    OnPropertyChanged(nameof(B));
+                    OnPropertyChanged(nameof(C));
+                    OnPropertyChanged(nameof(M));
+                    OnPropertyChanged(nameof(Y));
+                    OnPropertyChanged(nameof(K));
+                }
+            }
+        }
         public double C
         {
             get => _c;
@@ -171,9 +150,8 @@ namespace kolory
             {
                 _c = value;
                 OnPropertyChanged(nameof(C));
-                ConvertCMYKToRGB(); // Aktualizacja RGB na podstawie nowego CMYK                                   // Aktualizuj wartości HSV na podstawie nowego RGB
+                ConvertCMYKToRGB();
                 ConvertToHSV();
-                // Informowanie interfejsu użytkownika o zmianie koloru
                 OnPropertyChanged(nameof(R));
                 OnPropertyChanged(nameof(G));
                 OnPropertyChanged(nameof(B));
@@ -182,7 +160,6 @@ namespace kolory
                 OnPropertyChanged(nameof(V));
             }
         }
-
         public double M
         {
             get => _m;
@@ -190,9 +167,8 @@ namespace kolory
             {
                 _m = value;
                 OnPropertyChanged(nameof(M));
-                ConvertCMYKToRGB(); // Aktualizacja RGB na podstawie nowego CMYK                                // Aktualizuj wartości HSV na podstawie nowego RGB
-                ConvertToHSV();
-                // Informowanie interfejsu użytkownika o zmianie koloru
+                ConvertCMYKToRGB();
+                ConvertToHSV();            
                 OnPropertyChanged(nameof(R));
                 OnPropertyChanged(nameof(G));
                 OnPropertyChanged(nameof(B));
@@ -201,7 +177,6 @@ namespace kolory
                 OnPropertyChanged(nameof(V));
             }
         }
-
         public double Y
         {
             get => _y;
@@ -209,10 +184,25 @@ namespace kolory
             {
                 _y = value;
                 OnPropertyChanged(nameof(Y));
-                ConvertCMYKToRGB(); // Aktualizacja RGB na podstawie nowego CMYK
-                                    // Aktualizuj wartości HSV na podstawie nowego RGB
+                ConvertCMYKToRGB(); 
                 ConvertToHSV();
-                // Informowanie interfejsu użytkownika o zmianie koloru
+                OnPropertyChanged(nameof(R));
+                OnPropertyChanged(nameof(G));
+                OnPropertyChanged(nameof(B));
+                OnPropertyChanged(nameof(H));
+                OnPropertyChanged(nameof(S));
+                OnPropertyChanged(nameof(V));
+            }
+        }
+        public double K
+        {
+            get => _k;
+            set
+            {
+                _k = value;
+                OnPropertyChanged(nameof(K));
+                ConvertCMYKToRGB(); 
+                ConvertToHSV();
                 OnPropertyChanged(nameof(R));
                 OnPropertyChanged(nameof(G));
                 OnPropertyChanged(nameof(B));
@@ -222,25 +212,6 @@ namespace kolory
             }
         }
 
-        public double K
-        {
-            get => _k;
-            set
-            {
-                _k = value;
-                OnPropertyChanged(nameof(K));
-                ConvertCMYKToRGB(); // Aktualizacja RGB na podstawie nowego CMYK
-                                    // Aktualizuj wartości HSV na podstawie nowego RGB
-                ConvertToHSV();
-                // Informowanie interfejsu użytkownika o zmianie koloru
-                OnPropertyChanged(nameof(R));
-                OnPropertyChanged(nameof(G));
-                OnPropertyChanged(nameof(B));
-                OnPropertyChanged(nameof(H));
-                OnPropertyChanged(nameof(S));
-                OnPropertyChanged(nameof(V));
-            }
-        }
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)
@@ -315,9 +286,6 @@ namespace kolory
             OnPropertyChanged(nameof(Y));
             OnPropertyChanged(nameof(K));
         }
-
-        // Można teraz wywołać te metody po ustawieniu wartości RGB w modelu.
-
         public void ConvertHSVToRGB()
         {
             if (S == 0)
@@ -366,12 +334,10 @@ namespace kolory
                     _b = (byte)(q * 255);
                     break;
             }
-            // Powiadamiaj o zmianach
+
             OnPropertyChanged(nameof(R));
             OnPropertyChanged(nameof(G));
             OnPropertyChanged(nameof(B));
-
-            // Ponieważ zmieniły się wartości RGB, trzeba również zaktualizować CMYK
             ConvertToCMYK();
 
         }
@@ -447,7 +413,6 @@ namespace kolory
             OnPropertyChanged(nameof(B));
             return (tempR, tempG, tempB);
         }
-
 
         private void RGBToCMYK(byte r, byte g, byte b)
         {

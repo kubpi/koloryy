@@ -91,15 +91,20 @@
            
 
         </StackPanel>
-        <Viewport3D Grid.Row="1">
+        <!-- ... pozostała część XAML ... -->
+
+        <Viewport3D x:Name="myViewport3D" Grid.Row="1">
             <Viewport3D.Camera>
                 <PerspectiveCamera Position="6 6 6" LookDirection="-6 -6 -6"/>
             </Viewport3D.Camera>
+
             <ModelVisual3D>
                 <ModelVisual3D.Content>
                     <DirectionalLight Direction="-1,-1,-1"/>
                 </ModelVisual3D.Content>
             </ModelVisual3D>
+
+            <!-- Sześcian -->
             <ModelVisual3D>
                 <ModelVisual3D.Content>
                     <GeometryModel3D Material="{Binding GradientMaterial}">
@@ -131,11 +136,42 @@
                                     <AxisAngleRotation3D x:Name="rotateZ" Axis="0 0 1"/>
                                 </RotateTransform3D.Rotation>
                             </RotateTransform3D>
-                            <TranslateTransform3D OffsetX="0.5" OffsetY="0.5" OffsetZ="0.5" />
+                            <TranslateTransform3D OffsetX="-1" OffsetY="0" OffsetZ="0"  />
                         </Transform3DGroup.Children>
                     </Transform3DGroup>
                 </ModelVisual3D.Transform>
             </ModelVisual3D>
+
+            <!-- Stożek -->
+            <!-- Definicje pozostałych komponentów -->
+
+            <ModelVisual3D>
+                <ModelVisual3D.Content>
+                    <Binding Path="ConeModel"/>
+                </ModelVisual3D.Content>
+                <ModelVisual3D.Transform>
+                    <Transform3DGroup>
+                        <!-- Pierwsza transformacja: przesunięcie stożka, aby podstawa była umieszczona na osi Z -->
+                        <TranslateTransform3D OffsetX="2" OffsetY="0" OffsetZ="1" />
+                        <!-- Druga transformacja: obrót stożka wokół jego osi Y -->
+                        <RotateTransform3D CenterX="2" CenterY="0" CenterZ="1">
+                            <RotateTransform3D.Rotation>
+                                <AxisAngleRotation3D Axis="1 0 0" x:Name="coneRotateX" Angle="0"/>
+                            </RotateTransform3D.Rotation>
+                        </RotateTransform3D>
+
+                        <RotateTransform3D CenterX="2" CenterY="0" CenterZ="1">
+                            <RotateTransform3D.Rotation>
+                                <AxisAngleRotation3D Axis="0 1 0" x:Name="coneRotateY" Angle="0"/>
+                            </RotateTransform3D.Rotation>
+                        </RotateTransform3D>
+                        <TranslateTransform3D OffsetX="1" OffsetY="2" OffsetZ="0" />
+                    </Transform3DGroup>
+                </ModelVisual3D.Transform>
+            </ModelVisual3D>
+
+         
+
         </Viewport3D>
 
         <!-- Slidery do obracania kostki -->
@@ -150,6 +186,19 @@
             </StackPanel>
             
             
+        <!-- Suwaki do obracania stożka -->
+        <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Horizontal">
+            <!-- Twoje suwaki dla sześcianu -->
+        
+                <Slider Width="100" Minimum="0" Maximum="360" Value="{Binding ElementName=rotateX, Path=Angle, Mode=TwoWay}" />
+                <Slider Width="100" Minimum="0" Maximum="360" Value="{Binding ElementName=rotateY, Path=Angle, Mode=TwoWay}" />
+            
+            <!-- Dodatkowe suwaki dla stożka -->
+            <Slider Width="100" Minimum="0" Maximum="360" Value="{Binding ElementName=coneRotateX, Path=Angle, Mode=TwoWay}" />
+            <Slider Width="100" Minimum="0" Maximum="360" Value="{Binding ElementName=coneRotateY, Path=Angle, Mode=TwoWay}" />
         </StackPanel>
+
+        <!-- ... pozostała część XAML ... -->
+
     </Grid>
 </Window>
