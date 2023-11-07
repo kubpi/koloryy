@@ -53,7 +53,7 @@ namespace kolory
             _color = new ColorModel();
             _color.PropertyChanged += ColorModel_PropertyChanged;
             GradientMaterial = CreateGradientMaterialForRactangle();
-            ConeModel = CreateCone(1.5, 0.5, 20);
+            ConeModel = CreateCone(1, 0.5, 20);
         }
 
         private void ColorModel_PropertyChanged(object sender, PropertyChangedEventArgs e)

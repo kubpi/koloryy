@@ -7,7 +7,6 @@
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
         Title="Grafika Komputerowa CW2" Height="900" Width="1600">
 
-
     <Window.DataContext>
         <local:ColorConverterViewModel />
     </Window.DataContext>
@@ -24,7 +23,6 @@
             <RowDefinition Height="auto">
             </RowDefinition>
         </Grid.RowDefinitions>
-
 
         <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="0,20,0,0" Grid.Row="0" HorizontalAlignment="Center">
             <TextBlock Text="Konwersja przestrzeni barw - RGB, CMYK, Hex, HSV" FontWeight="Bold" HorizontalAlignment="Center" FontSize="20"/>
@@ -80,18 +78,12 @@
                 </StackPanel>
             </StackPanel>
 
-
-            <!-- Możesz dodać kolejne sekcje dla HSV i HSL w podobny sposób -->
-
             <Rectangle Height="100" Width="250" Fill="{Binding ColorDisplay}" Margin="0,20,0,0"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Label Content="HEX:" HorizontalAlignment="Center" Margin="0,10,0,0" FontSize="15"/>
                 <Label Content="{Binding ColorDisplayHex}" HorizontalAlignment="Center" Margin="0,10,0,0" FontSize="15"/>
             </StackPanel>
-           
-
         </StackPanel>
-        <!-- ... pozostała część XAML ... -->
 
         <Viewport3D x:Name="myViewport3D" Grid.Row="1">
             <Viewport3D.Camera>
@@ -136,7 +128,7 @@
                                     <AxisAngleRotation3D x:Name="rotateZ" Axis="0 0 1"/>
                                 </RotateTransform3D.Rotation>
                             </RotateTransform3D>
-                            <TranslateTransform3D OffsetX="-1" OffsetY="0" OffsetZ="0"  />
+                            <TranslateTransform3D OffsetX="-1" OffsetY="-0.5" OffsetZ="0"  />
                         </Transform3DGroup.Children>
                     </Transform3DGroup>
                 </ModelVisual3D.Transform>
@@ -165,40 +157,47 @@
                                 <AxisAngleRotation3D Axis="0 1 0" x:Name="coneRotateY" Angle="0"/>
                             </RotateTransform3D.Rotation>
                         </RotateTransform3D>
-                        <TranslateTransform3D OffsetX="1" OffsetY="2" OffsetZ="0" />
+                        <TranslateTransform3D OffsetX="0" OffsetY="1.7" OffsetZ="0" />
                     </Transform3DGroup>
                 </ModelVisual3D.Transform>
             </ModelVisual3D>
-
-         
-
         </Viewport3D>
 
-        <!-- Slidery do obracania kostki -->
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Horizontal" Grid.Row="2">
-            <StackPanel Orientation="Vertical" Margin="10 0 10 10">
-                <TextBlock Text="Obrót oś X:" HorizontalAlignment="Center" Margin="0 0 0 0" FontSize="15"/>
-                <Slider Width="100" Minimum="0" Maximum="360" Value="{Binding ElementName=rotateX, Path=Angle, Mode=TwoWay}" Margin="0 10 0 0"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
+            <!-- Slidery do obracania kostki -->
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Horizontal" Grid.Row="2">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Kostka" HorizontalAlignment="Center" Margin="0 0 0 0" FontSize="20"/>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical" Margin="10 0 10 10">
+                            <TextBlock Text="Obrót oś X:" HorizontalAlignment="Center" Margin="0 0 0 0" FontSize="15"/>
+                            <Slider Width="100" Minimum="0" Maximum="360" Value="{Binding ElementName=rotateX, Path=Angle, Mode=TwoWay}" Margin="0 10 0 0"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Margin="10 0 10 0">
+                            <TextBlock Text="Obrót oś Y:" HorizontalAlignment="Center" Margin="0 0 0 0" FontSize="15"/>
+                            <Slider Width="100" Minimum="0" Maximum="360" Value="{Binding ElementName=rotateY, Path=Angle, Mode=TwoWay}" Margin="0 10 0 0"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
             </StackPanel>
-            <StackPanel Orientation="Vertical" Margin="10 0 10 0">
-                <TextBlock Text="Obrót oś Y:" HorizontalAlignment="Center" Margin="0 0 0 0" FontSize="15"/>
-                <Slider Width="100" Minimum="0" Maximum="360" Value="{Binding ElementName=rotateY, Path=Angle, Mode=TwoWay}" Margin="0 10 0 0"/>
-            </StackPanel>
-            
-            
-        <!-- Suwaki do obracania stożka -->
-        <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Horizontal">
-            <!-- Twoje suwaki dla sześcianu -->
-        
-                <Slider Width="100" Minimum="0" Maximum="360" Value="{Binding ElementName=rotateX, Path=Angle, Mode=TwoWay}" />
-                <Slider Width="100" Minimum="0" Maximum="360" Value="{Binding ElementName=rotateY, Path=Angle, Mode=TwoWay}" />
-            
-            <!-- Dodatkowe suwaki dla stożka -->
-            <Slider Width="100" Minimum="0" Maximum="360" Value="{Binding ElementName=coneRotateX, Path=Angle, Mode=TwoWay}" />
-            <Slider Width="100" Minimum="0" Maximum="360" Value="{Binding ElementName=coneRotateY, Path=Angle, Mode=TwoWay}" />
-        </StackPanel>
 
-        <!-- ... pozostała część XAML ... -->
+            <!-- Slidery do obracania stożka -->
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Horizontal" Grid.Row="2">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Stożek" HorizontalAlignment="Center" Margin="0 0 0 0" FontSize="20"/>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical" Margin="10 0 10 10">
+                            <TextBlock Text="Obrót oś X:" HorizontalAlignment="Center" Margin="0 0 0 0" FontSize="15"/>
+                            <Slider Width="100" Minimum="0" Maximum="360" Value="{Binding ElementName=coneRotateX, Path=Angle, Mode=TwoWay}" Margin="0 10 0 0"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Margin="10 0 10 0">
+                            <TextBlock Text="Obrót oś Y:" HorizontalAlignment="Center" Margin="0 0 0 0" FontSize="15"/>
+                            <Slider Width="100" Minimum="0" Maximum="360" Value="{Binding ElementName=coneRotateY, Path=Angle, Mode=TwoWay}" Margin="0 10 0 0"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
 
     </Grid>
 </Window>
