@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\kubpi\\Desktop\\koloryy\\kolory.csproj": {}
+    "C:\\Users\\LOL\\Documents\\GitHub\\koloryy\\kolory.csproj": {}
   },
   "projects": {
-    "C:\\Users\\kubpi\\Desktop\\koloryy\\kolory.csproj": {
+    "C:\\Users\\LOL\\Documents\\GitHub\\koloryy\\kolory.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\kubpi\\Desktop\\koloryy\\kolory.csproj",
+        "projectUniqueName": "C:\\Users\\LOL\\Documents\\GitHub\\koloryy\\kolory.csproj",
         "projectName": "kolory",
-        "projectPath": "C:\\Users\\kubpi\\Desktop\\koloryy\\kolory.csproj",
-        "packagesPath": "C:\\Users\\kubpi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\kubpi\\Desktop\\koloryy\\obj\\",
+        "projectPath": "C:\\Users\\LOL\\Documents\\GitHub\\koloryy\\kolory.csproj",
+        "packagesPath": "C:\\Users\\LOL\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\LOL\\Documents\\GitHub\\koloryy\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\kubpi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\LOL\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -64,7 +64,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.406\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     }

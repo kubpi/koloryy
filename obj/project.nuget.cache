@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "jQU4lEbsde5kxTC0ANhhOqMuJ3rnHnRoQtyEV5rvbBa9V1V+A+7+BHsYw7qEbbmHuLv7g37mj0PMTcyOANra2g==",
+  "dgSpecHash": "6MX5rWVeycGplTs2G1tzRBbWeQNvf5kTE81Ooh+hzIfGFUqCw24T5Gd9Haei5742R+qE0ZrRFJgwVRfRpKLo2Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\kubpi\\Desktop\\koloryy\\kolory.csproj",
+  "projectFilePath": "C:\\Users\\LOL\\Documents\\GitHub\\koloryy\\kolory.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\kubpi\\.nuget\\packages\\microsoft.win32.systemevents\\7.0.0\\microsoft.win32.systemevents.7.0.0.nupkg.sha512",
-    "C:\\Users\\kubpi\\.nuget\\packages\\system.drawing.common\\7.0.0\\system.drawing.common.7.0.0.nupkg.sha512"
+    "C:\\Users\\LOL\\.nuget\\packages\\microsoft.win32.systemevents\\7.0.0\\microsoft.win32.systemevents.7.0.0.nupkg.sha512",
+    "C:\\Users\\LOL\\.nuget\\packages\\system.drawing.common\\7.0.0\\system.drawing.common.7.0.0.nupkg.sha512"
   ],
   "logs": []
 }
